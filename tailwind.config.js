@@ -1,6 +1,6 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 export default {
-  darkMode: 'media', // or 'class'
+  darkMode: 'class', // ← ✅ CHANGE THIS LINE
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
