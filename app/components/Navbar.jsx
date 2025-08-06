@@ -1,36 +1,47 @@
-'use client'
-import { useState, useEffect } from 'react'
-import { FaGithub, FaMoon, FaSun } from 'react-icons/fa'
+'use client';
+
+import Link from 'next/link';
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from './ThemeContext';
 
 export default function Navbar() {
-  const [darkMode, setDarkMode] = useState(false)
+  const { theme } = useTheme();
 
-  useEffect(() => {
-    const saved = localStorage.getItem('theme') === 'dark'
-    setDarkMode(saved)
-    document.documentElement.classList.toggle('dark', saved)
-  }, [])
-
-  const toggleTheme = () => {
-    const newTheme = !darkMode
-    setDarkMode(newTheme)
-    document.documentElement.classList.toggle('dark', newTheme)
-    localStorage.setItem('theme', newTheme ? 'dark' : 'light')
-  }
+  const navLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Education', href: '/education' },
+    { label: 'Skills', href: '/skills' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Resume', href: '/resume' },
+    { label: 'Contact', href: '/contact' },
+  ];
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-white dark:bg-gray-900 shadow fixed top-0 left-0 w-full z-50">
-      <div className="font-bold text-xl text-gray-800 dark:text-white">Elvis Kiprono</div>
-      <div className="flex gap-4 items-center">
-        <a href="#projects" className="text-gray-800 dark:text-white hover:text-blue-500">Projects</a>
-        <a href="#contact" className="text-gray-800 dark:text-white hover:text-blue-500">Contact</a>
-        <a href="https://github.com/Elvis108-coder" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <FaGithub className="text-2xl text-gray-800 dark:text-white" />
-        </a>
-        <button onClick={toggleTheme} aria-label="Toggle Theme">
-          {darkMode ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-800 dark:text-white" />}
-        </button>
-      </div>
-    </nav>
-  )
+    <header className="w-full sticky top-0 z-50 bg-white dark:bg-black shadow-md transition duration-300">
+      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Left: Portfolio Name */}
+        <div className="text-xl font-bold text-gray-900 dark:text-white">
+          Elvis’s Portfolio
+        </div>
+
+        {/* Right: Nav Links + Theme Toggle */}
+        <div className="flex items-center gap-6">
+          <ul className="flex gap-6">
+            {navLinks.map(({ label, href }) => (
+              <li key={label}>
+                <Link
+                  href={href}
+                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ThemeToggle />
+        </div>
+      </nav>
+    </header>
+  );
 }
