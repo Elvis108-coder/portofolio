@@ -1,26 +1,44 @@
 'use client';
 
+import { useRef } from 'react';
 import { Github, Twitter, Instagram, Mail } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 export default function ContactPage() {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      'service_llmes5j',           
+      'template_6rznl8l',          
+      form.current,
+      'iR9p1HGmq_r5LuG2K'          
+    )
+    .then(() => {
+      alert('✅ Message sent successfully!');
+      form.current.reset();
+    })
+    .catch((error) => {
+      console.error('❌ Email send error:', error);
+      alert('Something went wrong. Please try again.');
+    });
+  };
+
   return (
     <main className="max-w-3xl mx-auto p-6 space-y-8">
       <h1 className="text-3xl font-bold">Contact Me</h1>
 
       {/* Contact Form */}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert('This form does not send emails yet.');
-        }}
-        className="space-y-4"
-      >
+      <form ref={form} onSubmit={sendEmail} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block font-medium mb-1">
+          <label htmlFor="from_name" className="block font-medium mb-1">
             Name
           </label>
           <input
-            id="name"
+            id="from_name"
+            name="from_name"
             type="text"
             required
             className="w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:text-white dark:border-gray-700"
@@ -28,11 +46,12 @@ export default function ContactPage() {
         </div>
 
         <div>
-          <label htmlFor="email" className="block font-medium mb-1">
+          <label htmlFor="reply_to" className="block font-medium mb-1">
             Email
           </label>
           <input
-            id="email"
+            id="reply_to"
+            name="reply_to"
             type="email"
             required
             className="w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:text-white dark:border-gray-700"
@@ -45,6 +64,7 @@ export default function ContactPage() {
           </label>
           <textarea
             id="message"
+            name="message"
             rows="5"
             required
             className="w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:text-white dark:border-gray-700"
