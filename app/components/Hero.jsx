@@ -12,18 +12,31 @@ const rotatingTexts = [
 ];
 
 export default function Hero() {
-  const [currentText, setCurrentText] = useState(0);
-  const [isMounted, setIsMounted] = useState(false); // Add this line
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true); // Prevent mismatch: ensures this only runs on client
+    const fullText = rotatingTexts[currentTextIndex];
+    let typeSpeed = isDeleting ? 60 : 100;
 
-    const interval = setInterval(() => {
-      setCurrentText((prev) => (prev + 1) % rotatingTexts.length);
-    }, 3000);
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        setDisplayedText(fullText.slice(0, displayedText.length + 1));
+        if (displayedText === fullText) {
+          setTimeout(() => setIsDeleting(true), 1000);
+        }
+      } else {
+        setDisplayedText(fullText.slice(0, displayedText.length - 1));
+        if (displayedText === '') {
+          setIsDeleting(false);
+          setCurrentTextIndex((prev) => (prev + 1) % rotatingTexts.length);
+        }
+      }
+    }, typeSpeed);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearTimeout(timeout);
+  }, [displayedText, isDeleting, currentTextIndex]);
 
   return (
     <section className="flex flex-col md:flex-row justify-between items-center px-6 py-20 bg-white dark:bg-black text-black dark:text-white min-h-screen">
@@ -31,15 +44,13 @@ export default function Hero() {
       <div className="md:w-1/2 pl-4 md:pl-12">
         <h1 className="text-4xl font-bold mb-2">Elvis Kiprono</h1>
 
-        {/* Only render rotating text once component is mounted */}
-        {isMounted && (
-          <h2 className="text-2xl font-medium text-purple-600 dark:text-purple-400 mb-4 transition-all duration-500">
-            {rotatingTexts[currentText]}
-          </h2>
-        )}
-
+        {/* Typewriter line */}
+        <h2 className="text-2xl font-medium text-purple-600 dark:text-purple-400 mb-4 min-h-[2.5rem] whitespace-nowrap">
+          {displayedText}
+          <span className="border-r-2 border-purple-600 animate-pulse ml-1" />
+        </h2>
         {/* Social Icons */}
-        <div className="flex space-x-4 mt-4">
+        <div className="flex space-x-4 mt-6">
           <a href="mailto:yelvisrotich@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:text-purple-500">
             <Mail />
           </a>

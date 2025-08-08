@@ -2,14 +2,36 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0 }
+};
 
 export default function Projects() {
   return (
     <main className="max-w-5xl mx-auto p-6 space-y-12">
-      <h1 className="text-3xl font-bold mb-4">Technical Projects</h1>
+      <motion.h1
+        className="text-3xl font-bold mb-4"
+        initial="hidden"
+        whileInView="visible"
+        variants={fadeInUp}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
+        Technical Projects
+      </motion.h1>
 
       {/* Beauty Shop */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col md:flex-row gap-6">
+      <motion.div
+        className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col md:flex-row gap-6"
+        initial="hidden"
+        whileInView="visible"
+        variants={fadeInUp}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         <div className="md:w-1/2">
           <Image
             src="/projects/beautyshop.png"
@@ -39,18 +61,24 @@ export default function Projects() {
             </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Devbuy Electronics Store */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col md:flex-row gap-6">
+      <motion.div
+        className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col md:flex-row gap-6"
+        initial="hidden"
+        whileInView="visible"
+        variants={fadeInUp}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        viewport={{ once: true }}
+      >
         <div className="md:w-1/2">
           <Image
             src="/projects/devbuy.png"
-            alt="Devbuy Electronics Store Screenshot"
+            alt="Devbuy Electronics Store"
             width={600}
             height={400}
             className="rounded w-full h-auto object-cover"
-            priority
           />
         </div>
         <div className="md:w-1/2 space-y-3">
@@ -66,10 +94,17 @@ export default function Projects() {
             💻 GitHub
           </Link>
         </div>
-      </div>
+      </motion.div>
 
       {/* Habit Tracker */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 space-y-4">
+      <motion.div
+        className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 space-y-4"
+        initial="hidden"
+        whileInView="visible"
+        variants={fadeInUp}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
         <h2 className="text-2xl font-semibold">Habit Tracker CLI App – Command Line Python Application</h2>
         <p>
           Tracks daily habits, supports progress tracking, and visualizes habit stats.
@@ -81,7 +116,7 @@ export default function Projects() {
         <Link href="https://github.com/Elvis108-coder/Habit-Tracker" target="_blank" className="text-purple-600 hover:underline">
           💻 GitHub
         </Link>
-      </div>
+      </motion.div>
     </main>
   );
 }
