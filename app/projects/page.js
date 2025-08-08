@@ -42,18 +42,30 @@ export default function Projects() {
       </div>
 
       {/* Devbuy Electronics Store */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 space-y-4">
-        <h2 className="text-2xl font-semibold">Devbuy Electronics Store – E-commerce Platform</h2>
-        <p>
-          A responsive e-commerce website with product search, filtering, sorting, and cart functionality.
-          Implemented state management using React hooks and Context API. Integrated checkout flow with dynamic cart updates.
-        </p>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          <strong>Tech Stack:</strong> React, React Router, Context API
-        </p>
-        <Link href="https://github.com/your-username/devbuy-store" target="_blank" className="text-purple-600 hover:underline">
-          💻 GitHub
-        </Link>
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 flex flex-col md:flex-row gap-6">
+        <div className="md:w-1/2">
+          <Image
+            src="/projects/devbuy.png"
+            alt="Devbuy Electronics Store Screenshot"
+            width={600}
+            height={400}
+            className="rounded w-full h-auto object-cover"
+            priority
+          />
+        </div>
+        <div className="md:w-1/2 space-y-3">
+          <h2 className="text-2xl font-semibold">Devbuy Electronics Store – E-commerce Platform</h2>
+          <p>
+            A responsive e-commerce website with product search, filtering, sorting, and cart functionality.
+            Implemented state management using React hooks and Context API. Integrated checkout flow with dynamic cart updates.
+          </p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            <strong>Tech Stack:</strong> React, React Router, Context API
+          </p>
+          <Link href="https://github.com/your-username/devbuy-store" target="_blank" className="text-purple-600 hover:underline">
+            💻 GitHub
+          </Link>
+        </div>
       </div>
 
       {/* Habit Tracker */}
