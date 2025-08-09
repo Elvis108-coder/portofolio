@@ -7,20 +7,24 @@ import ThemeToggle from './ThemeToggle';
 export default function Navbar() {
   return (
     <header className="bg-white dark:bg-black shadow-sm sticky top-0 z-50">
-      <div className="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div className="w-full px-4 py-3 flex justify-between items-center">
         
-        {/* LOGO with animation */}
+        {/* LOGO pushed to the very left */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          className="flex-shrink-0"
         >
-          <Link href="/" className="text-xl font-bold text-purple-600 dark:text-purple-400">
-            Elvis's portofolio
+          <Link
+            href="/"
+            className="text-xl font-bold text-purple-600 dark:text-purple-400"
+          >
+            Elvis's portfolio
           </Link>
         </motion.div>
 
-        {/* NAV LINKS */}
+        {/* NAV LINKS centered */}
         <nav className="flex space-x-6 text-sm font-medium">
           {['/', '/about', '/education', '/skills', '/projects', '/resume', '/contact'].map((path, index) => {
             const label = path === '/' ? 'Home' : path.replace('/', '').replace(/^\w/, c => c.toUpperCase());
@@ -36,7 +40,7 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* THEME TOGGLE with framer motion bounce */}
+        {/* THEME TOGGLE */}
         <motion.div
           whileTap={{ scale: 0.9 }}
           whileHover={{ rotate: 5 }}
@@ -46,7 +50,7 @@ export default function Navbar() {
         </motion.div>
       </div>
 
-      {/* Underline hover animation CSS */}
+      {/* Underline hover animation */}
       <style jsx>{`
         .hover-underline-animation::after {
           content: '';

@@ -13,7 +13,7 @@ export default function Resume() {
 
       <div className="flex items-center gap-4">
         <Link
-          href="/projects/Elvis_Kiprono_CV.pdf"
+          href="/projects/Elvis Cv.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
